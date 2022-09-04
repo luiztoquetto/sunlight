@@ -1,0 +1,17 @@
+.theme__dark-mode {
+  --color-text: #FFFFFF;
+  --color-background: #333333;
+  --color-disabled: #999999;
+  --color-component: #222222;
+  --color-detail: #F9EDEA;
+  --color-button: #D42126;
+}
+
+.theme__light-mode {
+  --color-text: #000000;
+  --color-background: #FFFFFF;
+  --color-disabled: #999999;
+  --color-component: #F1F1F1;
+  --color-detail: #333333;
+  --color-button: #D42126;
+}
