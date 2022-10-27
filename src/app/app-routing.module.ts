@@ -4,8 +4,23 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/condominiums/condominiums.module').then(m => m.CondominiumsModule),
-  }
+    redirectTo: 'login',
+    pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./pages/login/login.module')
+      .then(m => m.LoginModule)
+  },
+  {
+    path: 'condominium-listing',
+    loadChildren: () => import('./pages/condominium-listing/condominium-listing.module')
+      .then(m => m.CondominiumListingModule)
+  },
+  {
+    path: '**',
+    redirectTo: '/'
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@import "src/app/theme/variables.scss";
+@import "app/theme/inputs.scss";
+@import "app/theme/buttons.scss";
+
+* {
+  outline: 0;
+
+  box-sizing: border-box;
+
+  padding: 0;
+  margin: 0;
+
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}

@@ -1,0 +1,59 @@
+.login {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+
+  > img {
+    width: 210px;
+    height: 53.41px;
+    margin: 135px 0 80px 0;
+  }
+
+  &--container {
+    display: flex;
+    flex-direction: column;
+
+    &--header {
+      display: flex;
+      width: 100%;
+
+      h2 {
+        margin: 0 0 7px 2px;
+        font-size: 20px;
+        font-weight: 700;
+        color: var(--color-text);
+      }
+
+      img {
+        width: 20px;
+        height: 19px;
+        margin: 3px 0 0 5px;
+      }
+    }
+
+    span {
+      margin: 0 0 13px 2px;
+      font-size: 13px;
+      color: var(--color-text);
+    }
+
+    &--inputs {
+      display: flex;
+      flex-direction: column;
+      width: 85vw;
+
+      input {
+        margin-bottom: 13px;
+        padding: 18px 16px;
+      }
+    }
+  }
+
+  button {
+    width: 85vw;
+    height: 55px;
+    margin-top: 43px;
+  }
+}
