@@ -17,6 +17,7 @@ export class AppComponent implements OnDestroy {
   }
 
   public isDarkTheme: boolean = true;
+
   private isDarkThemeSubscription: Subscription = new Subscription();
 
   public ngOnDestroy(): void {

@@ -5,7 +5,8 @@ input {
   border-radius: 12px;
   color: var(--color-text);
   font-size: 14px;
-}
-::placeholder {
-  color: var(--color-text);
+
+  &::placeholder {
+    color: var(--color-text);
+  }
 }
