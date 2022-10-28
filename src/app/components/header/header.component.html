@@ -1,1 +1,22 @@
-<p>header works!</p>
+<div class="header">
+  <ng-container *ngIf="current === headerEnum.NORMAL" [ngTemplateOutlet]="normal"></ng-container>
+  <ng-container *ngIf="current === headerEnum.TABS" [ngTemplateOutlet]="tabs"></ng-container>
+</div>
+
+<ng-template #normal>
+  <img src="assets/sunlight.svg " alt="Sunlight" draggable="false">
+</ng-template>
+
+<ng-template #tabs>
+  <div class="header--tabs">
+    <div class="header--tabs--localization">
+      <img src="assets/arrow-left-icon.svg" alt="Voltar" draggable="false">
+      <h3>Parque dos Princípes</h3>
+    </div>
+
+    <div class="header--tabs--navigation">
+      <span [class.general]="true">Geral</span>
+      <span [class.spot]="false">Pontos</span>
+    </div>
+  </div>
+</ng-template>
