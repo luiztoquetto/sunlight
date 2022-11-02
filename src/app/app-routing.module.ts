@@ -18,6 +18,11 @@ const routes: Routes = [
       .then(m => m.CondominiumListingModule)
   },
   {
+    path: 'graphics',
+    loadChildren: () => import('./pages/graphics/graphics.module')
+      .then(m => m.GraphicsModule)
+  },
+  {
     path: '**',
     redirectTo: '/'
   },
