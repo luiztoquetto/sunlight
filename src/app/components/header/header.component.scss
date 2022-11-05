@@ -63,7 +63,7 @@
           color: var(--color-detail);
           position: relative;
 
-          &:after {
+          &::after {
             width: 3rem;
             height: 5px;
             background-color: var(--color-detail);
@@ -80,7 +80,7 @@
           color: var(--color-detail);
           position: relative;
 
-          &:after {
+          &::after {
             width: 4rem;
             height: 5px;
             background-color: var(--color-detail);

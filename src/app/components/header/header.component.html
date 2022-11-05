@@ -1,6 +1,6 @@
 <div class="header">
-  <ng-container *ngIf="current === headerEnum.NORMAL" [ngTemplateOutlet]="normal"></ng-container>
-  <ng-container *ngIf="current === headerEnum.TABS" [ngTemplateOutlet]="tabs"></ng-container>
+  <ng-container *ngIf="currentHeader === headerEnum.NORMAL" [ngTemplateOutlet]="normal"></ng-container>
+  <ng-container *ngIf="currentHeader === headerEnum.TABS" [ngTemplateOutlet]="tabs"></ng-container>
 </div>
 
 <ng-template #normal>
@@ -10,13 +10,18 @@
 <ng-template #tabs>
   <div class="header--tabs">
     <div class="header--tabs--localization">
-      <img src="assets/arrow-left-icon.svg" alt="Voltar" draggable="false">
-      <h3>Parque dos Princípes</h3>
+      <img src="assets/arrow-left-icon.svg" alt="Voltar"
+           draggable="false" (click)="redirectTo()">
+
+      <h3>{{ condominiumName }}</h3>
     </div>
 
     <div class="header--tabs--navigation">
-      <span [class.general]="true">Geral</span>
-      <span [class.spot]="false">Pontos</span>
+      <span [class.general]="navigation === headerNavigationEnum.GENERAL"
+            (click)="changeNavigation(headerNavigationEnum.GENERAL)">Geral</span>
+
+      <span [class.spot]="navigation === headerNavigationEnum.SPOTS"
+            (click)="changeNavigation(headerNavigationEnum.SPOTS)">Pontos</span>
     </div>
   </div>
 </ng-template>
