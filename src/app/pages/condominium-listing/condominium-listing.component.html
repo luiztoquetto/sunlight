@@ -1,1 +1,13 @@
-<app-header></app-header>
+<div class="page">
+  <ng-container *ngFor="let item of list">
+    <app-card
+      routerLink="/graphics"
+      [title]="item.name"
+      [description]="item.address">
+    </app-card>
+  </ng-container>
+
+  <ng-container *ngIf="!list.length">
+    <p>Nenhum condominio registrado!</p>
+  </ng-container>
+</div>
