@@ -17,9 +17,10 @@ export class HeaderComponent {
   public goTo: string = '';
 
   @Input()
-  public condominiumName: string = 'aaa';
+  public condominiumName: string = '';
 
-  public currentHeader: HeaderEnum = HeaderEnum.TABS;
+  @Input()
+  public currentHeader: HeaderEnum = HeaderEnum.NORMAL;
 
   public headerEnum: typeof HeaderEnum = HeaderEnum;
 
