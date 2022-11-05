@@ -10,10 +10,10 @@
     <span>Entre com o seu usuário e a senha.</span>
 
     <div class="login--container--inputs">
-      <input type="email" placeholder="Usuário">
-      <input type="password" placeholder="Senha">
+      <input type="email" [(ngModel)]="email" placeholder="Usuário">
+      <input type="password" [(ngModel)]="password" placeholder="Senha">
     </div>
   </div>
 
-  <button type="button" class="button" (click)="redirect()">Entrar</button>
+  <button type="button" class="button" (click)="login()">Entrar</button>
 </div>

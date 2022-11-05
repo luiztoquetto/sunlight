@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@email.com",
+      "password": "123456",
+      "role": "admin",
+      "name": "Pedro"
+    },
+    {
+      "id": 2,
+      "email": "sindico.jose@email.com",
+      "password": "123456",
+      "role": "syndicate",
+      "name": "José"
+    },
+    {
+      "id": 3,
+      "email": "sindico.luiz@email.com",
+      "password": "123456",
+      "role": "syndicate",
+      "name": "Luiz"
+    }
+  ]
+}
