@@ -12,6 +12,6 @@ declare module "inversores.json" {
       power_grid_total_apparent_power: number;
       inverter_temperature: number;
       generation_yesterday: number;
-    }[][]
+    }[]
   }[]
 }
