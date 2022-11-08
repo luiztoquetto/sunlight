@@ -1,3 +1,4 @@
+import { GraphicModule } from './../../components/graphic/graphic.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GraphicsComponent } from "./graphics.component";
@@ -12,7 +13,8 @@ import { HeaderModule } from 'src/app/components/header/header.module';
     GraphicsRoutingModule,
     InfoCardModule,
     CurrentInfoCardModule,
-    HeaderModule
+    HeaderModule,
+    GraphicModule,
   ],
   declarations: [GraphicsComponent],
   exports: [GraphicsComponent],
