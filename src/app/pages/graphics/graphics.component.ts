@@ -40,6 +40,8 @@ export class GraphicsComponent implements OnInit {
 
   public recentGenerationDate: string = '';
 
+  public monthlyData: number[] = [];
+
   public headerEnum: typeof HeaderEnum = HeaderEnum;
 
   ngOnInit(): void {
@@ -51,6 +53,7 @@ export class GraphicsComponent implements OnInit {
     this.filterLifetime();
     this.filterYesterday();
     this.filterRecent();
+    this.setUpMontlyData();
   }
 
   filterMonth(): void {
@@ -148,5 +151,30 @@ export class GraphicsComponent implements OnInit {
       this.recentGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
     else
       this.recentGeneration = (value / 1000).toFixed(2).replace('.', ',') + ' MWh';
+  }
+
+  setUpMontlyData(): void {
+    const months = [...Array(12).keys()].map(i => i+1);
+    const data: number[] = [];
+
+    const getInversorYear = (time: string) => time.split('-')[0];
+    const getInversorMonth = (time: string) => time.split('-')[1];
+
+    const currentYear = new Date().getFullYear().toString();
+
+    months.forEach(month => {
+      const formattedMonth = month.toString().padStart(2, '0');
+
+      this.inversors.forEach(inverter => {
+        const monthData = inverter.data.filter(data => {
+          return getInversorMonth(data.time) === formattedMonth && getInversorYear(data.time) === currentYear.toString();
+        });
+
+
+        data[month - 1] = (data[month - 1] ?? 0) + (monthData.length ? monthData[monthData.length - 1].total_generation - monthData[0].total_generation : 0);
+      });
+    });
+
+    this.monthlyData = data;
   }
 }
