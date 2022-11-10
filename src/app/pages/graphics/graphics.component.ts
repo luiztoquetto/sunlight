@@ -170,7 +170,6 @@ export class GraphicsComponent implements OnInit {
           return getInversorMonth(data.time) === formattedMonth && getInversorYear(data.time) === currentYear.toString();
         });
 
-
         data[month - 1] = (data[month - 1] ?? 0) + (monthData.length ? monthData[monthData.length - 1].total_generation - monthData[0].total_generation : 0);
       });
     });
