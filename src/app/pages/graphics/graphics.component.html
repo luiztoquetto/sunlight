@@ -13,6 +13,14 @@
       <app-current-info-card [title]="recentGeneration" [description]="recentGenerationDate"></app-current-info-card>
     </div>
 
-    <app-graphic type="monthly" [monthlyData]="monthlyData"></app-graphic>
+    <div class="page--content--graphic">
+      <div class="page--content--graphic--types">
+        <button (click)="type = 'yearly'" [class.active]="type === 'yearly'">Anual</button>
+        <button (click)="type = 'monthly'" [class.active]="type === 'monthly'">Mensal</button>
+        <button (click)="type = 'daily'" [class.active]="type === 'daily'">Diário</button>
+      </div>
+
+      <app-graphic [type]="type" [monthlyData]="monthlyData" [yearlyData]="yearlyData"></app-graphic>
+    </div>
   </div>
 </div>

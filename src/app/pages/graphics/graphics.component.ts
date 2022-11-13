@@ -1,3 +1,4 @@
+import { ChartType } from './../../components/graphic/graphic.component';
 import { CondominiumEntity } from 'src/app/models/entities/condominium.entity';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -42,6 +43,10 @@ export class GraphicsComponent implements OnInit {
 
   public monthlyData: number[] = [];
 
+  public yearlyData: { year: string, value: number }[] = [];
+
+  public type: ChartType = 'monthly';
+
   public headerEnum: typeof HeaderEnum = HeaderEnum;
 
   ngOnInit(): void {
@@ -54,6 +59,7 @@ export class GraphicsComponent implements OnInit {
     this.filterYesterday();
     this.filterRecent();
     this.setUpMontlyData();
+    this.setUpYearlyData();
   }
 
   filterMonth(): void {
@@ -175,5 +181,46 @@ export class GraphicsComponent implements OnInit {
     });
 
     this.monthlyData = data;
+  }
+
+  setUpYearlyData(): void {
+    const data: { year: string, value: number }[] = [];
+
+    const getInversorYear = (time: string) => time.split('-')[0];
+
+    const years: string[] = [];
+
+    this.inversors.forEach(inverter => {
+      inverter.data.forEach(data => {
+        const year = getInversorYear(data.time);
+
+        if (!years.includes(year))
+          years.push(year);
+      });
+    });
+
+    years.forEach(year => {
+      this.inversors.forEach(inverter => {
+        const yearData = inverter.data.filter(data => {
+          return getInversorYear(data.time) === year;
+        });
+
+        if (yearData.length) {
+          const indexOfYear = data.findIndex(d => d.year === year);
+          const value = yearData[yearData.length - 1].total_generation - yearData[0].total_generation;
+
+          if (indexOfYear >= 0)
+            data[indexOfYear].value += value;
+          else
+            data.push({
+              year,
+              value,
+            });
+        }
+
+      });
+    });
+
+    this.yearlyData = data;
   }
 }
