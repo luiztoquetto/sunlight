@@ -4,8 +4,24 @@
 
 .card {
     width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
 
-    background: var(--color-component);
-    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+    &::-webkit-scrollbar {
+      height: 3px;
+      background-color: rgb(226, 226, 226);
+      scroll-margin: 2rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #1e81f7;
+      border-radius: 10px;
+    }
+}
+
+.border {
+  background: var(--color-component);
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+  overflow: hidden;
 }

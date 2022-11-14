@@ -1,4 +1,5 @@
-import { Component, Input, ViewChild, OnInit } from '@angular/core';
+import { trigger } from '@angular/animations';
+import { Component, Input, ViewChild, OnInit, ElementRef } from '@angular/core';
 import {
   ApexAxisChartSeries,
   ApexChart,
@@ -32,7 +33,7 @@ export type ChartType = 'monthly' | 'yearly' | 'daily';
 export class GraphicComponent implements OnInit {
 
   @ViewChild("chart")
-  chart?: ChartComponent;
+  chart?: ElementRef<HTMLDivElement>;
 
   @Input()
   public set type(type: ChartType) {
@@ -46,6 +47,9 @@ export class GraphicComponent implements OnInit {
 
   @Input()
   public yearlyData: { year: string, value: number }[] = [];
+
+  @Input()
+  public dailyData: { day: string, value: number }[] = [];
 
   public chartOptions!: ChartOptions;
 
@@ -61,6 +65,9 @@ export class GraphicComponent implements OnInit {
 
     if (this.chartType === 'yearly')
       this.setUpYearlyChart();
+
+    if (this.chartType === 'daily')
+      this.setUpDailyChart();
   }
 
   private setUpMonthChart(): void {
@@ -72,7 +79,7 @@ export class GraphicComponent implements OnInit {
         }
       ],
       chart: {
-        height: 350,
+        height: 320,
         type: "bar",
         toolbar: {
           show: false,
@@ -135,12 +142,12 @@ export class GraphicComponent implements OnInit {
         },
         tooltip: {
           enabled: true,
-          offsetY: -35
+          offsetY: -35,
         }
       },
       fill: {
         type: "color",
-        colors: ['#1e81f7']
+        colors: ['#1e81f7'],
       },
       yaxis: {
         axisBorder: {
@@ -173,7 +180,7 @@ export class GraphicComponent implements OnInit {
         }
       ],
       chart: {
-        height: 350,
+        height: 320,
         type: "bar",
         toolbar: {
           show: false,
@@ -250,6 +257,110 @@ export class GraphicComponent implements OnInit {
         }
       }
     };
+  }
+
+  private setUpDailyChart(): void {
+    const barWidthInPx = 30;
+    const dynamicWidth = this.dailyData.length * (barWidthInPx * 2);
+    const chartWidth = this.chart && (dynamicWidth < this.chart?.nativeElement.clientWidth) ? '100%' : dynamicWidth;
+
+    this.chartOptions = {
+      series: [
+        {
+          name: "Geração energética (kWh)",
+          data: this.dailyData.map(d => d.value),
+        }
+      ],
+      chart: {
+        height: 320,
+        width: chartWidth,
+        type: "bar",
+        toolbar: {
+          show: false,
+        },
+        zoom: {
+          enabled: true,
+        }
+      },
+      plotOptions: {
+        bar: {
+          dataLabels: {
+            position: "top" // top, center, bottom
+          },
+        }
+      },
+      dataLabels: {
+        enabled: false,
+        offsetY: -20,
+        style: {
+          fontSize: "12px",
+          colors: ["#304758"]
+        }
+      },
+      xaxis: {
+        categories: this.dailyData.map(d => d.day),
+        position: "top",
+        labels: {
+          offsetY: -18,
+          style: {
+            colors: '#fff'
+          }
+        },
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        crosshairs: {
+          fill: {
+            type: "gradient",
+            gradient: {
+              colorFrom: "#D8E3F0",
+              colorTo: "#BED1E6",
+              stops: [0, 100],
+              opacityFrom: 0.4,
+              opacityTo: 0.5
+            }
+          },
+        },
+        tooltip: {
+          enabled: true,
+          offsetY: -35,
+        }
+      },
+      fill: {
+        type: "color",
+        colors: ['#1e81f7'],
+      },
+      yaxis: {
+        axisBorder: {
+          show: false
+        },
+        axisTicks: {
+          show: false
+        },
+        labels: {
+          show: false,
+          formatter: val => val.toFixed(2),
+        },
+      },
+      title: {
+        text: "Geração energética (kWh)",
+        offsetY: 320,
+        align: "center",
+        style: {
+          color: "#fff"
+        }
+      }
+    };
+
+    setTimeout(() => {
+      this.chart?.nativeElement.scrollTo({
+        left: this.chart.nativeElement.scrollWidth,
+        behavior: 'smooth',
+      })
+    }, 200);
   }
  }
 

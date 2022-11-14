@@ -45,6 +45,8 @@ export class GraphicsComponent implements OnInit {
 
   public yearlyData: { year: string, value: number }[] = [];
 
+  public dailyData: { day: string, value: number }[] = [];
+
   public type: ChartType = 'monthly';
 
   public headerEnum: typeof HeaderEnum = HeaderEnum;
@@ -60,6 +62,7 @@ export class GraphicsComponent implements OnInit {
     this.filterRecent();
     this.setUpMontlyData();
     this.setUpYearlyData();
+    this.setUpDailyData();
   }
 
   filterMonth(): void {
@@ -148,7 +151,7 @@ export class GraphicsComponent implements OnInit {
 
     this.inversors.forEach(inverter => {
       if (inverter.data.length) {
-        value += inverter.data[inverter.data.length - 1].daily_generation;
+        value = inverter.data[inverter.data.length - 1].daily_generation;
         this.recentGenerationDate = inverter.data[inverter.data.length - 1].time;
       }
     });
@@ -222,5 +225,39 @@ export class GraphicsComponent implements OnInit {
     });
 
     this.yearlyData = data;
+  }
+
+  setUpDailyData(): void {
+    const daysData: { day: string, value: number }[] = [];
+
+    const getInversorYear = (time: string) => time.split('-')[0];
+    const getInversorMonth = (time: string) => time.split('-')[1];
+    const getInversorDay = (time: string) => time.split('-')[2].split(' ')[0];
+
+    this.inversors.forEach(inverter => {
+      inverter.data.forEach(data => {
+        const time = `${getInversorDay(data.time)}/${getInversorMonth(data.time)}/${getInversorYear(data.time)}`;
+
+        if (!daysData.find(d => d.day === time))
+          daysData.push({ day: time, value: 0 });
+      });
+    });
+
+    this.inversors.forEach(inverter => {
+      inverter.data.forEach(data => {
+        const dayDataIndex = daysData.findIndex(d => d.day === `${getInversorDay(data.time)}/${getInversorMonth(data.time)}/${getInversorYear(data.time)}`);
+
+        if (dayDataIndex >= 0) {
+          const value = data.daily_generation;
+
+          daysData[dayDataIndex] = {
+            day: daysData[dayDataIndex].day,
+            value,
+          }
+        }
+      });
+    });
+
+    this.dailyData = daysData;
   }
 }
