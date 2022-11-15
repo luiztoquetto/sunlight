@@ -1,0 +1,11 @@
+<div class="page">
+  <app-header
+    goTo="condominium-listing"
+    [currentHeader]="headerEnum.TABS"
+    [navigation]="navigationEnum.SPOTS"
+    [generalRedirect]="'/graphics/' + condominium?.id"
+    [condominiumName]="condominium?.name ?? 'Pontos'">
+  </app-header>
+
+  Página de pontos
+</div>

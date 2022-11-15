@@ -18,9 +18,11 @@
 
     <div class="header--tabs--navigation">
       <span [class.general]="navigation === headerNavigationEnum.GENERAL"
+            [routerLink]="generalRedirect"
             (click)="changeNavigation(headerNavigationEnum.GENERAL)">Geral</span>
 
       <span [class.spot]="navigation === headerNavigationEnum.SPOTS"
+            [routerLink]="pointsRedirect"
             (click)="changeNavigation(headerNavigationEnum.SPOTS)">Pontos</span>
     </div>
   </div>

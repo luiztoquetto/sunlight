@@ -2,6 +2,7 @@ declare module "inversores.json" {
   export const inversores: {
     inversor_sn: string;
     condominiumId: number;
+    name: string;
     data: {
       time: string;
       total_dc_input_power: number;

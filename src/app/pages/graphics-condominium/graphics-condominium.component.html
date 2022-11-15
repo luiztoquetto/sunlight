@@ -1,0 +1,27 @@
+<div class="page">
+  <app-header
+    goTo="condominium-listing"
+    [currentHeader]="headerEnum.TABS"
+    [pointsRedirect]="'/graphics/' + condominium?.id + '/inverters'"
+    [condominiumName]="condominium?.name || ''">
+  </app-header>
+  <div class="page--content">
+    <div class="page--content--cards">
+      <app-info-card [title]="monthGeneration" description="Neste mês"></app-info-card>
+      <app-info-card [title]="yearGeneration" description="Neste ano"></app-info-card>
+      <app-info-card [title]="yesterdayGeneration" description="Ontem"></app-info-card>
+      <app-info-card [title]="lifetimeGeneration" description="Ao todo"></app-info-card>
+      <app-current-info-card [title]="recentGeneration" [description]="recentGenerationDate"></app-current-info-card>
+    </div>
+
+    <div class="page--content--graphic">
+      <div class="page--content--graphic--types">
+        <button (click)="type = 'yearly'" [class.active]="type === 'yearly'">Anual</button>
+        <button (click)="type = 'monthly'" [class.active]="type === 'monthly'">Mensal</button>
+        <button (click)="type = 'daily'" [class.active]="type === 'daily'">Diário</button>
+      </div>
+
+      <app-graphic [type]="type" [monthlyData]="monthlyData" [yearlyData]="yearlyData" [dailyData]="dailyData"></app-graphic>
+    </div>
+  </div>
+</div>

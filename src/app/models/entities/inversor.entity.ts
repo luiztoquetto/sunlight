@@ -1,7 +1,8 @@
 export interface InversorEntity {
   inversor_sn: string;
-    condominiumId: number;
-    data: InversorData[];
+  condominiumId: number;
+  name: string;
+  data: InversorData[];
 }
 
 export interface InversorData {

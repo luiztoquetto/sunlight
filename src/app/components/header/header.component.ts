@@ -22,9 +22,16 @@ export class HeaderComponent {
   @Input()
   public currentHeader: HeaderEnum = HeaderEnum.NORMAL;
 
-  public headerEnum: typeof HeaderEnum = HeaderEnum;
+  @Input()
+  public generalRedirect?: string;
 
+  @Input()
+  public pointsRedirect?: string;
+
+  @Input()
   public navigation: HeaderNavigationEnum = HeaderNavigationEnum.GENERAL;
+
+  public headerEnum: typeof HeaderEnum = HeaderEnum;
 
   public headerNavigationEnum: typeof HeaderNavigationEnum = HeaderNavigationEnum;
 
