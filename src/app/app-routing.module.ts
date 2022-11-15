@@ -18,6 +18,16 @@ const routes: Routes = [
       .then(m => m.CondominiumListingModule)
   },
   {
+    path: 'graphics/:condominiumId',
+    loadChildren: () => import('./pages/graphics/graphics.module')
+      .then(m => m.GraphicsModule)
+  },
+  {
+    path: 'graphics-inversor/:inversorSn',
+    loadChildren: () => import('./pages/graphics-inversor/graphics-inversor.module')
+      .then(m => m.GraphicsInversorModule)
+  },
+  {
     path: '**',
     redirectTo: '/'
   },

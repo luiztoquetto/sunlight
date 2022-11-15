@@ -1,0 +1,16 @@
+{
+  "condominiums": [
+    {
+      "id": 1,
+      "name": "Condominio 1",
+      "address": "Rua X, bairro Y, cidade Z",
+      "userIds": [2]
+    },
+    {
+      "id": 2,
+      "name": "Condominio 2",
+      "address": "Rua Y, bairro Z, cidade X",
+      "userIds": [2]
+    }
+  ]
+}
