@@ -12,6 +12,8 @@
 
 200359 - Luiz Fernando Toquetto 
 
-<img src=".github/assets/login.png" width="180" height="400">
-<img src=".github/assets/condominio.png" width="180" height="400">
-<img src=".github/assets/pontos.png" width="180" height="400">
+<div style="display:flex;">
+    <img style="margin-right: 10px" src=".github/assets/login.png" width="180" height="400">
+    <img style="margin-right: 10px" src=".github/assets/condominio.png" width="180" height="400">
+    <img src=".github/assets/pontos.png" width="180" height="400">
+</div>
