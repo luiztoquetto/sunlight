@@ -12,6 +12,6 @@
 
 200359 - Luiz Fernando Toquetto 
 
-![Tela de login](.github/assets/login.png)
-![Tela de condominio](.github/assets/condominio.png)
-![Tela de pontos](.github/assets/pontos.png)
+<img src=".github/assets/login.png" width="180" height="400">
+<img src=".github/assets/condominio.png" width="180" height="400">
+<img src=".github/assets/pontos.png" width="180" height="400">
