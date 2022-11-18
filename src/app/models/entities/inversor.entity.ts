@@ -1,5 +1,5 @@
 export interface InversorEntity {
-  inversor_sn: string;
+  inverter_sn: string;
   condominiumId: number;
   name: string;
   data: InversorData[];

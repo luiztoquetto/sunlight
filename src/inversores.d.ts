@@ -1,6 +1,6 @@
 declare module "inversores.json" {
   export const inversores: {
-    inversor_sn: string;
+    inverter_sn: string;
     condominiumId: number;
     name: string;
     data: {

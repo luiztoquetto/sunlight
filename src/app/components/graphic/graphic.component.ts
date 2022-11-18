@@ -49,7 +49,7 @@ export class GraphicComponent implements OnInit {
   public yearlyData: { year: string, value: number }[] = [];
 
   @Input()
-  public dailyData: { day: string, value: number }[] = [];
+  public dailyData: { [day: string]: number } = {};
 
   public chartOptions!: ChartOptions;
 
@@ -261,14 +261,14 @@ export class GraphicComponent implements OnInit {
 
   private setUpDailyChart(): void {
     const barWidthInPx = 30;
-    const dynamicWidth = this.dailyData.length * (barWidthInPx * 2);
+    const dynamicWidth = Object.keys(this.dailyData).length * (barWidthInPx * 2);
     const chartWidth = this.chart && (dynamicWidth < this.chart?.nativeElement.clientWidth) ? '100%' : dynamicWidth;
 
     this.chartOptions = {
       series: [
         {
           name: "Geração energética (kWh)",
-          data: this.dailyData.map(d => d.value),
+          data: Object.values(this.dailyData),
         }
       ],
       chart: {
@@ -298,7 +298,7 @@ export class GraphicComponent implements OnInit {
         }
       },
       xaxis: {
-        categories: this.dailyData.map(d => d.day),
+        categories: Object.keys(this.dailyData),
         position: "top",
         labels: {
           offsetY: -18,
