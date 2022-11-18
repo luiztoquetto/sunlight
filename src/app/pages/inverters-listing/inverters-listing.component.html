@@ -4,8 +4,19 @@
     [currentHeader]="headerEnum.TABS"
     [navigation]="navigationEnum.SPOTS"
     [generalRedirect]="'/graphics/' + condominium?.id"
-    [condominiumName]="condominium?.name ?? 'Pontos'">
+    [condominiumName]="condominium?.name ?? 'Inversores'">
   </app-header>
 
-  Página de pontos
+  <div class="page--list">
+    <ng-container *ngFor="let item of list">
+      <app-card
+        [title]="item.name"
+        [description]="'Inversor: ' + item.inverter_sn">
+      </app-card>
+    </ng-container>
+
+    <ng-container *ngIf="!list.length">
+      <p>Nenhum inversor registrado!</p>
+    </ng-container>
+  </div>
 </div>
