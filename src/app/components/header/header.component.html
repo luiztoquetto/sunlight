@@ -1,6 +1,6 @@
 <div class="header">
   <ng-container *ngIf="currentHeader === headerEnum.NORMAL" [ngTemplateOutlet]="normal"></ng-container>
-  <ng-container *ngIf="currentHeader === headerEnum.TABS" [ngTemplateOutlet]="tabs"></ng-container>
+  <ng-container *ngIf="currentHeader === headerEnum.TABS || currentHeader === headerEnum.TITLE" [ngTemplateOutlet]="tabs"></ng-container>
 </div>
 
 <ng-template #normal>
@@ -16,14 +16,14 @@
       <h3>{{ condominiumName }}</h3>
     </div>
 
-    <div class="header--tabs--navigation">
+    <div *ngIf="currentHeader === headerEnum.TABS" class="header--tabs--navigation">
       <span [class.general]="navigation === headerNavigationEnum.GENERAL"
             [routerLink]="generalRedirect"
             (click)="changeNavigation(headerNavigationEnum.GENERAL)">Geral</span>
 
       <span [class.spot]="navigation === headerNavigationEnum.SPOTS"
             [routerLink]="pointsRedirect"
-            (click)="changeNavigation(headerNavigationEnum.SPOTS)">Inversores</span>
+            (click)="changeNavigation(headerNavigationEnum.SPOTS)">Pontos</span>
     </div>
   </div>
 </ng-template>

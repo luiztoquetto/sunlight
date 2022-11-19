@@ -1,9 +1,9 @@
 <div class="page">
   <app-header
-    goTo="condominium-listing"
-    [currentHeader]="headerEnum.TABS"
-    [pointsRedirect]="'/graphics/' + condominium?.id + '/inverters'"
-    [condominiumName]="'Nome do ponto'">
+    [goTo]="'/graphics/' + condominium?.id + '/inverters'"
+    [currentHeader]="headerEnum.TITLE"
+    [navigation]="headerNavigationEnum.SPOTS"
+    [condominiumName]="inverter?.name || 'Inversor'">
   </app-header>
   <div class="page--content">
     <div class="page--content--cards">

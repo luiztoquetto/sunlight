@@ -1,3 +1,4 @@
+import { HeaderNavigationEnum } from './../../models/enums/header.enum';
 import { ChartType } from './../../components/graphic/graphic.component';
 import { CondominiumEntity } from 'src/app/models/entities/condominium.entity';
 import { Component, OnInit } from '@angular/core';
@@ -17,17 +18,19 @@ export class GraphicsInverterComponent implements OnInit {
   constructor(
     private readonly activatedRoute: ActivatedRoute,
   ) {
-    const id = this.activatedRoute.snapshot.paramMap.get('condominiumId');
+    const condominiumId = this.activatedRoute.snapshot.paramMap.get('condominiumId');
+    const inverterSn = this.activatedRoute.snapshot.paramMap.get('inverterSn');
 
-    if (id) {
-      this.condominium = condominiumsJson.condominiums.find(c => c.id === +id);
-      this.inversors = inversorsJson.inversores.filter(i => i.condominiumId === +id);
+    if (condominiumId && inverterSn) {
+      this.condominium = condominiumsJson.condominiums.find(c => c.id === +condominiumId);
+      this.inverter = inversorsJson.inversores.find(i => i.inverter_sn === inverterSn);
+      console.log(this.inverter)
     }
   }
 
   public condominium?: CondominiumEntity;
 
-  public inversors: InversorEntity[] = [];
+  public inverter?: InversorEntity;
 
   public monthGeneration: string = '0 kWh';
 
@@ -51,6 +54,8 @@ export class GraphicsInverterComponent implements OnInit {
 
   public headerEnum: typeof HeaderEnum = HeaderEnum;
 
+  public headerNavigationEnum: typeof HeaderNavigationEnum = HeaderNavigationEnum;
+
   ngOnInit(): void {
     if (!this.condominium)
       return;
@@ -73,14 +78,12 @@ export class GraphicsInverterComponent implements OnInit {
 
     let value = 0;
 
-    this.inversors.forEach(inverter => {
-      const monthData = inverter.data.filter(data => {
-        return getInversorMonth(data.time) === currentMonth && getInversorYear(data.time) === currentYear.toString();
-      });
+    const monthData = this.inverter?.data.filter(data => {
+      return getInversorMonth(data.time) === currentMonth && getInversorYear(data.time) === currentYear.toString();
+    }) || [];
 
-      if (monthData.length)
-        value += monthData[monthData.length - 1].total_generation - monthData[0].total_generation;
-    });
+    if (monthData.length)
+      value += monthData[monthData.length - 1].total_generation - monthData[0].total_generation;
 
     this.monthGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
   }
@@ -91,14 +94,12 @@ export class GraphicsInverterComponent implements OnInit {
 
     let value = 0;
 
-    this.inversors.forEach(inverter => {
-      const yearData = inverter.data.filter(data => {
-        return getInversorYear(data.time) === currentYear.toString();
-      })
+    const yearData = this.inverter?.data.filter(data => {
+      return getInversorYear(data.time) === currentYear.toString();
+    }) || [];
 
-      if (yearData.length)
-        value += yearData[yearData.length - 1].total_generation - yearData[0].total_generation;
-    });
+    if (yearData.length)
+      value += yearData[yearData.length - 1].total_generation - yearData[0].total_generation;
 
     if (+value < 10_000)
       this.yearGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
@@ -109,10 +110,8 @@ export class GraphicsInverterComponent implements OnInit {
   filterLifetime(): void {
     let value = 0;
 
-    this.inversors.forEach(inverter => {
-      if (inverter.data.length)
-        value += inverter.data[inverter.data.length - 1].total_generation;
-    });
+    if (this.inverter?.data.length)
+      value += this.inverter.data[this.inverter.data.length - 1].total_generation;
 
     if (+value < 10_000)
       this.lifetimeGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
@@ -131,14 +130,12 @@ export class GraphicsInverterComponent implements OnInit {
     const getInversorMonth = (time: string) => time.split('-')[1];
     const getInversorDay = (time: string) => time.split('-')[2].split(' ')[0];
 
-    this.inversors.forEach(inverter => {
-      const yesterDayData = inverter.data.filter(data => {
-        return getInversorYear(data.time) === currentYear && getInversorMonth(data.time) === currentMonth && getInversorDay(data.time) === currentDay;
-      })
+    const yesterDayData = this.inverter?.data.filter(data => {
+      return getInversorYear(data.time) === currentYear && getInversorMonth(data.time) === currentMonth && getInversorDay(data.time) === currentDay;
+    }) || [];
 
-      if (yesterDayData.length)
-        value += yesterDayData[yesterDayData.length - 1].daily_generation;
-    });
+    if (yesterDayData.length)
+      value += yesterDayData[yesterDayData.length - 1].daily_generation;
 
     if (+value < 10_000)
       this.yesterdayGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
@@ -154,24 +151,22 @@ export class GraphicsInverterComponent implements OnInit {
     const getInversorMonth = (time: string) => time.split('-')[1];
     const getInversorDay = (time: string) => time.split('-')[2].split(' ')[0];
 
-    this.inversors.forEach(inverter => {
-      if (inverter.data.length) {
-        if (!date) {
-          const item = inverter.data[inverter.data.length - 1];
+    if (this.inverter?.data.length) {
+      if (!date) {
+        const item = this.inverter.data[this.inverter.data.length - 1];
 
-          value = item.daily_generation;
-          this.recentGenerationDate = item.time;
+        value = item.daily_generation;
+        this.recentGenerationDate = item.time;
 
-          date = `${getInversorDay(item.time)}/${getInversorMonth(item.time)}/${getInversorYear(item.time)}`;
-        } else {
-          const filteredByDate = inverter.data.filter(i => `${getInversorDay(i.time)}/${getInversorMonth(i.time)}/${getInversorYear(i.time)}` === date);
-          const item = filteredByDate[filteredByDate.length - 1];
+        date = `${getInversorDay(item.time)}/${getInversorMonth(item.time)}/${getInversorYear(item.time)}`;
+      } else {
+        const filteredByDate = this.inverter.data.filter(i => `${getInversorDay(i.time)}/${getInversorMonth(i.time)}/${getInversorYear(i.time)}` === date);
+        const item = filteredByDate[filteredByDate.length - 1];
 
-          if (item)
-            value += item.daily_generation;
-        }
+        if (item)
+          value += item.daily_generation;
       }
-    });
+    }
 
     if (+value < 10_000)
       this.recentGeneration = value.toFixed(2).replace('.', ',') + ' kWh';
@@ -180,7 +175,7 @@ export class GraphicsInverterComponent implements OnInit {
   }
 
   setUpMontlyData(): void {
-    const months = [...Array(12).keys()].map(i => i+1);
+    const months = [...Array(12).keys()].map(i => i + 1);
     const data: number[] = [];
 
     const getInversorYear = (time: string) => time.split('-')[0];
@@ -191,13 +186,11 @@ export class GraphicsInverterComponent implements OnInit {
     months.forEach(month => {
       const formattedMonth = month.toString().padStart(2, '0');
 
-      this.inversors.forEach(inverter => {
-        const monthData = inverter.data.filter(data => {
-          return getInversorMonth(data.time) === formattedMonth && getInversorYear(data.time) === currentYear.toString();
-        });
+      const monthData = this.inverter?.data.filter(data => {
+        return getInversorMonth(data.time) === formattedMonth && getInversorYear(data.time) === currentYear.toString();
+      }) || [];
 
-        data[month - 1] = (data[month - 1] ?? 0) + (monthData.length ? monthData[monthData.length - 1].total_generation - monthData[0].total_generation : 0);
-      });
+      data[month - 1] = (data[month - 1] ?? 0) + (monthData.length ? monthData[monthData.length - 1].total_generation - monthData[0].total_generation : 0);
     });
 
     this.monthlyData = data;
@@ -210,35 +203,30 @@ export class GraphicsInverterComponent implements OnInit {
 
     const years: string[] = [];
 
-    this.inversors.forEach(inverter => {
-      inverter.data.forEach(data => {
-        const year = getInversorYear(data.time);
+    this.inverter?.data.forEach(data => {
+      const year = getInversorYear(data.time);
 
-        if (!years.includes(year))
-          years.push(year);
-      });
+      if (!years.includes(year))
+        years.push(year);
     });
 
     years.forEach(year => {
-      this.inversors.forEach(inverter => {
-        const yearData = inverter.data.filter(data => {
-          return getInversorYear(data.time) === year;
-        });
+      const yearData = this.inverter?.data.filter(data => {
+        return getInversorYear(data.time) === year;
+      }) || [];
 
-        if (yearData.length) {
-          const indexOfYear = data.findIndex(d => d.year === year);
-          const value = yearData[yearData.length - 1].total_generation - yearData[0].total_generation;
+      if (yearData.length) {
+        const indexOfYear = data.findIndex(d => d.year === year);
+        const value = yearData[yearData.length - 1].total_generation - yearData[0].total_generation;
 
-          if (indexOfYear >= 0)
-            data[indexOfYear].value += value;
-          else
-            data.push({
-              year,
-              value,
-            });
-        }
-
-      });
+        if (indexOfYear >= 0)
+          data[indexOfYear].value += value;
+        else
+          data.push({
+            year,
+            value,
+          });
+      }
     });
 
     this.yearlyData = data;
@@ -251,21 +239,19 @@ export class GraphicsInverterComponent implements OnInit {
     const getInversorMonth = (time: string) => time.split('-')[1];
     const getInversorDay = (time: string) => time.split('-')[2].split(' ')[0];
 
-    this.inversors.forEach(inverter => {
-      const dayData: { [day: string]: number } = {};
+    const dayData: { [day: string]: number } = {};
 
-      inverter.data.forEach(data => {
-        const time = `${getInversorDay(data.time)}/${getInversorMonth(data.time)}/${getInversorYear(data.time)}`;
+    this.inverter?.data.forEach(data => {
+      const time = `${getInversorDay(data.time)}/${getInversorMonth(data.time)}/${getInversorYear(data.time)}`;
 
-        const value = data.daily_generation;
+      const value = data.daily_generation;
 
-        dayData[time] = value;
-      });
-
-      daysData.push(dayData);
+      dayData[time] = value;
     });
 
-    const result = daysData.reduce((final, data) =>{
+    daysData.push(dayData);
+
+    const result = daysData.reduce((final, data) => {
       Object.entries(data).forEach(([day, value]) => {
         final[day] = (final[day] || 0) + value;
       })
