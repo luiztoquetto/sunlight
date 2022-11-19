@@ -9,6 +9,10 @@
     padding: 2rem 1.5rem;
 
     overflow: auto;
+
+    > p {
+      color: var(--color-text);
+    }
   }
 
   > span {

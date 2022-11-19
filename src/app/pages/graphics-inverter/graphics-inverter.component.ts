@@ -24,7 +24,6 @@ export class GraphicsInverterComponent implements OnInit {
     if (condominiumId && inverterSn) {
       this.condominium = condominiumsJson.condominiums.find(c => c.id === +condominiumId);
       this.inverter = inversorsJson.inversores.find(i => i.inverter_sn === inverterSn);
-      console.log(this.inverter)
     }
   }
 
