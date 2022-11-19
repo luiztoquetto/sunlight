@@ -5,6 +5,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { GraphicsCondominiumComponent } from '../graphics-condominium/graphics-condominium.component';
 import { GraphicsCondominiumModule } from '../graphics-condominium/graphics-condominium.module';
 import { GraphicsComponent } from './graphics.component';
+import { GraphicsInverterComponent } from '../graphics-inverter/graphics-inverter.component';
+import { GraphicsInverterModule } from '../graphics-inverter/graphics-inverter.module';
 
 const routes: Routes = [
   {
@@ -19,6 +21,10 @@ const routes: Routes = [
         path: ':condominiumId/inverters',
         component: InvertersListingComponent,
       },
+      {
+        path: ':condominiumId/inverter/:inverterSn',
+        component: GraphicsInverterComponent,
+      },
     ]
   },
 ];
@@ -28,6 +34,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     GraphicsCondominiumModule,
     InvertersListingModule,
+    GraphicsInverterModule,
   ],
   exports: [RouterModule]
 })

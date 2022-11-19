@@ -11,6 +11,7 @@
     <ng-container *ngFor="let item of list">
       <app-card
         [title]="item.name"
+        [routerLink]="['/graphics', condominium?.id, 'inverter', item.inverter_sn]"
         [description]="'Inversor: ' + item.inverter_sn">
       </app-card>
     </ng-container>
