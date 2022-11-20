@@ -21,6 +21,8 @@
     &--icon {
         width: 56px;
         height: 56px;
+        min-width: 56px;
+        min-height: 56px;
 
         background-color: var(--color-background);
         border-radius: 50%;

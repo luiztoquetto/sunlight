@@ -3,13 +3,13 @@
     {
       "id": 1,
       "name": "Condominio 1",
-      "address": "Rua X, bairro Y, cidade Z",
+      "address": "R. Comendador Vicente Amaral, 580 - Jardim Guaruja",
       "userIds": [2]
     },
     {
       "id": 2,
       "name": "Condominio 2",
-      "address": "Rua Y, bairro Z, cidade X",
+      "address": "Rua Heloisa Oliveira Evangelista, 300 Campolim",
       "userIds": [2]
     }
   ]
