@@ -31,7 +31,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/global.scss"
+              "src/global.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": [
               "node_modules/apexcharts/dist/apexcharts.min.js"
