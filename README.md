@@ -1,5 +1,11 @@
 # Sunlight - Construtora planeta
 
+## Técnologias
+
+<img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" />
+<img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
+
+
 ## Grupo
 
 200411 - Alexander Victor Rodrigues Poliser (UP033LPIN1  / UP033TIN1  / CP600TIN2)
