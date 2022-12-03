@@ -32,3 +32,7 @@ Necessário:
 Comandos:
 - npm i (para instalar as dependências)
 - npm run start (para rodar o projeto na porta 4200)
+
+
+## Script Python (Conversão Excel -> Json)
+- [Repositório](https://github.com/enzocassemiro/sunlight-scrapper)
