@@ -1,12 +1,12 @@
 # Sunlight - Construtora planeta
 
-## Técnologias
+## Tecnologias
 
-<img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" /> + CapacitorJS
-
-
-<img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />
-
+<div>
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/angularjs/angularjs-original.svg" />
+  <img width="50" src="https://user-images.githubusercontent.com/71186310/205463220-db4a9d65-a50b-44f0-819a-3ee1a5bdbd03.png" />
+  <img width="50" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" />  
+</div>
 
 ## Grupo
 
