@@ -2,18 +2,33 @@
 
 ## Grupo
 
-200411 - Alexander Victor Rodrigues Poliser  
+200411 - Alexander Victor Rodrigues Poliser (UP033LPIN1  / UP033TIN1  / CP600TIN2)
 
-200089 - Deevis Billi Poul Rabelo de Araujo 
+200089 - Deevis Billi Poul Rabelo de Araujo (UP033LPIN1  / UP033TIN1  / CP600TIN2)
 
-200394 - Enzo Caíque Chanes Cassemiro   
+200394 - Enzo Caíque Chanes Cassemiro (UP033LPIN1  / UP033TIN1  / CP600TIN2)
 
-200109 - Leonardo Dimarchi Souza da Cruz  
+200109 - Leonardo Dimarchi Souza da Cruz (UP033LPIN1  / UP033TIN1  / CP600TIN2)
 
-200359 - Luiz Fernando Toquetto 
+200359 - Luiz Fernando Toquetto (UP033LPIN1  / UP033TIN1  / CP600TIN2)
+
+## Funcionalidades
+
+- Login
+- Visualização dos dados dos condominios (Geral)
+- Visualização dos dados de um inversor (Ponto)
 
 <div style="display:flex;">
     <img style="margin-right: 10px" src=".github/assets/login.png" width="180" height="400">
     <img style="margin-right: 10px" src=".github/assets/condominio.png" width="180" height="400">
     <img src=".github/assets/pontos.png" width="180" height="400">
 </div>
+
+## Rodar o projeto
+
+Necessário: 
+- NodeJS v16.x.x
+
+Comandos:
+- npm i (para instalar as dependências)
+- npm run start (para rodar o projeto na porta 4200)
